@@ -19,7 +19,6 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(inputData);
         if (inputData == null)
         {
             inputData = ScriptableObject.CreateInstance<InputData>();
@@ -27,7 +26,7 @@ public class PlayerInput : MonoBehaviour
 
         if (cam == null)
         {
-            cam = Camera.main;
+            cam = Camera.current;
         }
     }
 
