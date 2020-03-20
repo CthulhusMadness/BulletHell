@@ -22,10 +22,9 @@ public class InputControl : MonoBehaviour
     [SerializeField] private InputData inputData;
     [SerializeField, HideIf("type", AgentType.AI)] private Camera cam;
     [SerializeField] private Movement movement;
-    [SerializeField] private WeaponControl weaponControl;
+    [SerializeField] private Transform weapons;
 
     private Vector2 direction;
-    private float timer = 0;
 
     #endregion
 
@@ -33,8 +32,6 @@ public class InputControl : MonoBehaviour
 
     private void Start()
     {
-        timer = 0;
-        
         if (inputData == null)
         {
             inputData = ScriptableObject.CreateInstance<InputData>();
@@ -78,16 +75,17 @@ public class InputControl : MonoBehaviour
 
             if (Input.GetKey(inputData.FirstWeapon) && canShoot)
             {
-                timer -= Time.deltaTime;
-                if (timer <= 0)
+                foreach (Transform weapon in weapons)
                 {
-                    weaponControl.Shoot();
-                    timer = weaponControl.shotDelay;
+                    weapon.GetComponent<WeaponControl>().ControlWeapon();
                 }
             }
             else
             {
-                timer = 0;
+                foreach (Transform weapon in weapons)
+                {
+                    weapon.GetComponent<WeaponControl>().SetTimer(0);
+                }
             }
         }
 
@@ -108,16 +106,17 @@ public class InputControl : MonoBehaviour
             
             if (canShoot)
             {
-                timer -= Time.deltaTime;
-                if (timer <= 0)
+                foreach (Transform weapon in weapons)
                 {
-                    weaponControl.Shoot();
-                    timer = weaponControl.shotDelay;
+                    weapon.GetComponent<WeaponControl>().ControlWeapon();
                 }
             }
             else
             {
-                timer = 0;
+                foreach (Transform weapon in weapons)
+                {
+                    weapon.GetComponent<WeaponControl>().SetTimer(0);
+                }
             }
         }
 
