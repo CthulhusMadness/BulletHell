@@ -14,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - Enemy
+  - Agent
+  - 
   - Wall
   - Projectile
   - PostProcessing

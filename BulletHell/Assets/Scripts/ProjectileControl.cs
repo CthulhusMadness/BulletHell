@@ -38,9 +38,6 @@ public class ProjectileControl : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
-        
-        coroutine = Life();
-        StartCoroutine(coroutine);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,6 +52,16 @@ public class ProjectileControl : MonoBehaviour
 
     #region Methods
 
+    public void StartLife()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = Life();
+        StartCoroutine(coroutine);
+    }
+
     private IEnumerator Life()
     {
         float timer = 0;
@@ -64,7 +71,13 @@ public class ProjectileControl : MonoBehaviour
             yield return null;
         }
         
-        Destroy(gameObject);
+        FinishLife();
+    }
+
+    public void FinishLife()
+    {
+        gameObject.SetActive(false);
+        rb.velocity = Vector3.zero;
     }
 
     [Button(ButtonSizes.Medium)]
@@ -78,6 +91,7 @@ public class ProjectileControl : MonoBehaviour
 
     public void PushToDirection(Vector3 direction)
     {
+        rb.velocity = Vector3.zero;
         rb.AddForce(direction * speed, ForceMode.VelocityChange);
     }
 
