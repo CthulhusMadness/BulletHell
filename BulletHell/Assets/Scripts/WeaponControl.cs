@@ -7,15 +7,13 @@ using UnityEngine;
 public class WeaponControl : MonoBehaviour
 {
     #region Fields
+
+    public bool canShoot;
     
-    [SerializeField] private float shotDelay = .5f;
-    [SerializeField] private bool startWithDelay = false;
-    [SerializeField, ShowIf("startWithDelay")]
-    private float startDelay = .25f;
-    [SerializeField] private float projectileSpeed = 1f;
+    [NonSerialized] public string targetTag;
+
+    [SerializeField] private WeaponData weaponData;
     [SerializeField] private GameObject projectilePrefab;
-    
-    private float timer = 0;
     
     #endregion
 
@@ -23,15 +21,7 @@ public class WeaponControl : MonoBehaviour
 
     private void Awake()
     {
-        if (startWithDelay)
-        {
-            SetTimer(startDelay);
-        }
-    }
-
-    private void Update()
-    {
-        timer -= Time.deltaTime;
+        canShoot = true;
     }
 
     #endregion
@@ -40,23 +30,15 @@ public class WeaponControl : MonoBehaviour
 
     public void ControlWeapon()
     {
-        if (timer <= 0)
+        if (canShoot)
         {
             Shoot();
-            timer = shotDelay;
         }
     }
 
     private void Shoot()
     {
-        GameObject instance = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        float step = projectileSpeed;
-        instance.GetComponent<Rigidbody>().AddForce(transform.forward * step, ForceMode.VelocityChange);
-    }
-
-    public void SetTimer(float t)
-    {
-        timer = t;
+        StartCoroutine(weaponData.Shoot(transform, projectilePrefab, this, targetTag));
     }
 
     #endregion

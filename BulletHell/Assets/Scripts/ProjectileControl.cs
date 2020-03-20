@@ -9,12 +9,14 @@ public class ProjectileControl : MonoBehaviour
 {
     #region Fields
 
+    public string targetTag;
+    
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Collider collider;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float lifeTime = 10f;
-
+    [SerializeField] private float speed = 10f;
     
     private IEnumerator coroutine;
 
@@ -43,7 +45,7 @@ public class ProjectileControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        if (other.CompareTag(targetTag))
         {
             Hit();
         }
@@ -72,6 +74,11 @@ public class ProjectileControl : MonoBehaviour
         meshRenderer.enabled = false;
         rb.velocity = Vector3.zero;
         particle.Play();
+    }
+
+    public void PushToDirection(Vector3 direction)
+    {
+        rb.AddForce(direction * speed, ForceMode.VelocityChange);
     }
 
     #endregion

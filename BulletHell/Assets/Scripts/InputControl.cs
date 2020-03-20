@@ -11,16 +11,16 @@ public class InputControl : MonoBehaviour
     public enum AgentType
     {
         Player,
-        AI
+        Enemy
     }
     [EnumToggleButtons]
     public AgentType type;
     [HideIf("type", AgentType.Player)]
     public Transform target;
-    public bool canShoot;
+    public bool agentCanShoot = true;
 
     [SerializeField] private InputData inputData;
-    [SerializeField, HideIf("type", AgentType.AI)] private Camera cam;
+    [SerializeField, HideIf("type", AgentType.Enemy)] private Camera cam;
     [SerializeField] private Movement movement;
     [SerializeField] private Transform weapons;
 
@@ -32,11 +32,12 @@ public class InputControl : MonoBehaviour
 
     private void Start()
     {
+        SetTargetTag();
+        
         if (inputData == null)
         {
             inputData = ScriptableObject.CreateInstance<InputData>();
         }
-
         if (cam == null && type == AgentType.Player)
         {
             cam = Camera.current;
@@ -73,18 +74,11 @@ public class InputControl : MonoBehaviour
             Vector3 mousePosition = new Vector3(viewportPosition.x, 0, viewportPosition.y);
             movement.LookAt(transform.position + mousePosition);
 
-            if (Input.GetKey(inputData.FirstWeapon) && canShoot)
+            if (Input.GetKey(inputData.FirstWeapon) && agentCanShoot)
             {
                 foreach (Transform weapon in weapons)
                 {
                     weapon.GetComponent<WeaponControl>().ControlWeapon();
-                }
-            }
-            else
-            {
-                foreach (Transform weapon in weapons)
-                {
-                    weapon.GetComponent<WeaponControl>().SetTimer(0);
                 }
             }
         }
@@ -93,7 +87,7 @@ public class InputControl : MonoBehaviour
 
         #region AI
 
-        if (type == AgentType.AI)
+        if (type == AgentType.Enemy)
         {
             if (target != null)
             {
@@ -104,24 +98,34 @@ public class InputControl : MonoBehaviour
                 movement.LookAt(pointToLook);
             }
             
-            if (canShoot)
+            if (agentCanShoot)
             {
                 foreach (Transform weapon in weapons)
                 {
                     weapon.GetComponent<WeaponControl>().ControlWeapon();
                 }
             }
-            else
-            {
-                foreach (Transform weapon in weapons)
-                {
-                    weapon.GetComponent<WeaponControl>().SetTimer(0);
-                }
-            }
         }
 
         #endregion
         
+    }
+
+    private void SetTargetTag()
+    {
+        foreach (Transform weapon in weapons)
+        {
+            switch (type)
+            {
+                case AgentType.Player:
+                    weapon.GetComponent<WeaponControl>().targetTag = AgentType.Enemy.ToString();
+                    break;
+                
+                case AgentType.Enemy:
+                    weapon.GetComponent<WeaponControl>().targetTag = AgentType.Player.ToString();
+                    break;
+            }
+        }
     }
 
     #endregion
