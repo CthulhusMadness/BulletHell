@@ -19,27 +19,25 @@ public class Movement : MonoBehaviour
 
     #region Methods
 
+    #region Movement
+    
     public virtual void Move(Vector2 direction)
     {
         float step = speed * Time.deltaTime;
-        Vector3 movement = Vector3.zero;
-        if (direction != Vector2.zero)
-        {
-            movement = new Vector3(direction.x, 0, direction.y).normalized;
-        }
-        
+        Vector3 movement = new Vector3(direction.x, 0, direction.y).normalized;
         transform.Translate(movement * step);
     }
 
-    public void Rotate()
-    {
-        
-    }
+    #endregion
+
+    #region Rotation
 
     public void LookAt(Vector3 target)
     {
         graphics.LookAt(target);
     }
+
+    #endregion
 
     #endregion
 }

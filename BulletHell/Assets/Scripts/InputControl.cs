@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
+using UnityEditor;
 using UnityEngine;
 
 public class InputControl : MonoBehaviour
@@ -15,16 +17,32 @@ public class InputControl : MonoBehaviour
     }
     [EnumToggleButtons]
     public AgentType type;
-    [HideIf("type", AgentType.Player)]
-    public Transform target;
     public bool agentCanShoot = true;
 
     [SerializeField] private InputData inputData;
     [SerializeField, HideIf("type", AgentType.Enemy)] private Camera cam;
     [SerializeField] private Movement movement;
     [SerializeField] private Transform weapons;
-
-    private Vector2 direction;
+    
+    
+    [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)]
+    [SerializeField] private Transform target;
+    [PropertySpace(10)]
+    private enum MovementType {FollowTarget, Patrol}
+    [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)]
+    [SerializeField] private MovementType movementType;
+    [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)]
+    public List<Vector2> points = new List<Vector2>();
+    [PropertySpace(10)]
+    private enum RotationType {LookAtTarget, RotateItself, RotationPatrol}
+    [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)]
+    [SerializeField] private RotationType rotationType;
+    [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)] 
+    [SerializeField] private float rotationSpeed = 10f;
+    
+    private Vector2 direction = Vector2.zero;
+    private int pointIndex = 0;
+    private float currentAngle = 0;
 
     #endregion
 
@@ -52,6 +70,16 @@ public class InputControl : MonoBehaviour
     private void FixedUpdate()
     {
         movement.Move(direction);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        for (int i = 0; i < points.Count; i++)
+        {
+            Vector3 point = new Vector3(points[i].x, 1, points[i].y);
+            Gizmos.DrawSphere(point, 0.3f);
+        }
     }
 
     #endregion
@@ -89,14 +117,54 @@ public class InputControl : MonoBehaviour
 
         if (type == AgentType.Enemy)
         {
-            if (target != null)
+            Vector3 targetPoint = Vector3.zero;
+            switch (movementType)
             {
-                Vector3 targetPoint = target.position - transform.position;
-                direction = new Vector2(targetPoint.x, targetPoint.z);
+                case MovementType.FollowTarget:
+                    if (target != null)
+                    {
+                        targetPoint = target.position - transform.position;
+                    }
+                    break;
                 
-                Vector3 pointToLook = new Vector3(target.position.x, transform.position.y, target.position.z);
-                movement.LookAt(pointToLook);
+                case MovementType.Patrol:
+                    Vector3 point = new Vector3(points[pointIndex].x, transform.position.y, points[pointIndex].y);
+                    targetPoint = point - transform.position;
+                    if (Vector3.Distance(transform.position, point) < .5f)
+                    {
+                        pointIndex = pointIndex >= points.Count-1 ? 0 : pointIndex+1;
+                    }
+                    break;
             }
+            direction = new Vector2(targetPoint.x, targetPoint.z);
+
+            Vector3 pointToLook = transform.position + transform.forward;
+            switch (rotationType)
+            {
+                case RotationType.LookAtTarget:
+                    if (target != null)
+                    {
+                        pointToLook = new Vector3(target.position.x, transform.position.y, target.position.z);
+                    }
+                    break;
+                
+                case RotationType.RotateItself:
+                    currentAngle += rotationSpeed * Time.deltaTime;
+                    if (currentAngle > 360f)
+                    {
+                        currentAngle = 0;
+                    }
+                    float x = transform.position.x + 1 * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+                    float z = transform.position.z + 1 * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+                    pointToLook = new Vector3(x, transform.position.y, z);
+                    break;
+                
+                case RotationType.RotationPatrol:
+
+                    break;
+            }
+            Debug.Log(pointToLook);
+            movement.LookAt(pointToLook);
             
             if (agentCanShoot)
             {

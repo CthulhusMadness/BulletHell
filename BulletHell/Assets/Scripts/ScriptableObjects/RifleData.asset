@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RifleData
   m_EditorClassIdentifier: 
   quantity: 1
-  fireRate: 0.1
+  fireRate: 0.05
   waveDelay: 0
   angle: 0
