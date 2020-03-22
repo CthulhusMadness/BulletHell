@@ -318,10 +318,11 @@ GameObject:
   - component: {fileID: 5429686962259101520}
   - component: {fileID: 5429686962259101533}
   - component: {fileID: 5429686962259101522}
+  - component: {fileID: 4268179288291308282}
   - component: {fileID: 5429686962259101532}
   - component: {fileID: 957353326}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Agent
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,6 +374,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4268179288291308282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5429686962259101535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a98c2ad35dc1f4b9cbec0564ea70f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 10
+  input: {fileID: 5429686962259101532}
 --- !u!114 &5429686962259101532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,12 +401,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  target: {fileID: 0}
-  canShoot: 1
+  agentCanShoot: 1
   inputData: {fileID: 11400000, guid: acb202c2e8afca94b8460c2e3b6fc258, type: 2}
   cam: {fileID: 5429686961502941800}
   movement: {fileID: 957353326}
   weapons: {fileID: 1739227018279448874}
+  target: {fileID: 0}
+  movementType: 0
+  points: []
+  rotationType: 0
+  rotationSpeed: 10
 --- !u!114 &957353326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,9 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458e5ba4ea647d64c8a8d0798fc8aa56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotDelay: 0.1
-  startWithDelay: 0
-  startDelay: 0.25
-  projectileSpeed: 10
+  canShoot: 0
+  weaponData: {fileID: 0}
   projectilePrefab: {fileID: 1019503300961817909, guid: 7ad3778599a87db49b3c923bf44155d6,
     type: 3}
