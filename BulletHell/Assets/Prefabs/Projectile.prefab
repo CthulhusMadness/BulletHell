@@ -4828,7 +4828,7 @@ GameObject:
   - component: {fileID: 8353784055953018949}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4936,8 +4936,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e10ee80972b5d439a205168b3c2988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTag: 
   particle: {fileID: 5175917933900748878}
   collider: {fileID: 6977828149669948810}
   meshRenderer: {fileID: 2963650590017851094}
   rb: {fileID: 5028361897348100176}
   lifeTime: 8
+  speed: 10

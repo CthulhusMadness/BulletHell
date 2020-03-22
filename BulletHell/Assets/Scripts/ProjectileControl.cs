@@ -44,9 +44,16 @@ public class ProjectileControl : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
-            
             Agent target = other.GetComponent<Agent>();
             Hit(target);
+        }
+
+        if (other.CompareTag("Projectile"))
+        {
+            if (other.GetComponent<ProjectileControl>().targetTag != targetTag)
+            {
+                Stop();
+            }
         }
     }
 
@@ -73,10 +80,10 @@ public class ProjectileControl : MonoBehaviour
             yield return null;
         }
         
-        FinishLife();
+        Stop();
     }
 
-    public void FinishLife()
+    public void Stop()
     {
         gameObject.SetActive(false);
         rb.velocity = Vector3.zero;

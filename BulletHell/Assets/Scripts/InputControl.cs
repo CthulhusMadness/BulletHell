@@ -72,7 +72,7 @@ public class InputControl : MonoBehaviour
         movement.Move(direction);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         for (int i = 0; i < points.Count; i++)
