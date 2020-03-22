@@ -44,7 +44,9 @@ public class ProjectileControl : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
-            Hit();
+            
+            Agent target = other.GetComponent<Agent>();
+            Hit(target);
         }
     }
 
@@ -81,8 +83,9 @@ public class ProjectileControl : MonoBehaviour
     }
 
     [Button(ButtonSizes.Medium)]
-    private void Hit()
+    private void Hit(Agent target)
     {
+        target.Hit();
         collider.enabled = false;
         meshRenderer.enabled = false;
         rb.velocity = Vector3.zero;

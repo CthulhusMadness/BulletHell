@@ -50,7 +50,7 @@ public class InputControl : MonoBehaviour
 
     private void Start()
     {
-        SetTargetTag();
+        SetWeaponsTargetTag();
         
         if (inputData == null)
         {
@@ -163,7 +163,6 @@ public class InputControl : MonoBehaviour
 
                     break;
             }
-            Debug.Log(pointToLook);
             movement.LookAt(pointToLook);
             
             if (agentCanShoot)
@@ -179,7 +178,7 @@ public class InputControl : MonoBehaviour
         
     }
 
-    private void SetTargetTag()
+    private void SetWeaponsTargetTag()
     {
         foreach (Transform weapon in weapons)
         {

@@ -21,8 +21,7 @@ public class WeaponData : ScriptableObject
 
     #region Methods
 
-    public IEnumerator Shoot(Transform weaponPoint, WeaponControl weaponControl,
-        string targetTag)
+    public IEnumerator Shoot(Transform weaponPoint, WeaponControl weaponControl, string targetTag)
     {
         weaponControl.canShoot = false;
         for (int i = 0; i < quantity;)
