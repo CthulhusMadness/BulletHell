@@ -98,9 +98,13 @@ public class InputControl : MonoBehaviour
             direction = new Vector2(horiz, vert);
 
             // mouse
-            Vector2 viewportPosition = (Vector2)cam.ScreenToViewportPoint(Input.mousePosition) - new Vector2(.5f, .5f);
-            Vector3 mousePosition = new Vector3(viewportPosition.x, 0, viewportPosition.y);
-            movement.LookAt(transform.position + mousePosition);
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Vector3 pos = ray.GetPoint(Vector3.Distance(cam.transform.position, transform.position));
+            movement.LookAt(new Vector3(pos.x, transform.position.y, pos.z));
+
+            // Vector2 viewportPosition = (Vector2)cam.ScreenToViewportPoint(Input.mousePosition) - new Vector2(.5f, .5f);
+            // Vector3 mousePosition = new Vector3(viewportPosition.x, 0, viewportPosition.y);
+            // movement.LookAt(transform.position + mousePosition);
 
             if (Input.GetKey(inputData.FirstWeapon) && agentCanShoot)
             {
