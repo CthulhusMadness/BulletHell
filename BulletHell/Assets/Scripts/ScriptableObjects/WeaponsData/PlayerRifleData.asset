@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 618f3bd775b55a9419ba334ba7363d27, type: 3}
-  m_Name: SemiAutoData
+  m_Name: PlayerRifleData
   m_EditorClassIdentifier: 
-  quantity: 5
-  fireRate: 0.3
-  waveDelay: 1.5
+  quantity: 1
+  fireRate: 0.2
+  waveDelay: 0
   angle: 0

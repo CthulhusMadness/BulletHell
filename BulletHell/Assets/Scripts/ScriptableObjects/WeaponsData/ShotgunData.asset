@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618f3bd775b55a9419ba334ba7363d27, type: 3}
   m_Name: ShotgunData
   m_EditorClassIdentifier: 
-  quantity: 5
+  quantity: 4
   fireRate: 0
-  waveDelay: 1.5
+  waveDelay: 2
   angle: 15

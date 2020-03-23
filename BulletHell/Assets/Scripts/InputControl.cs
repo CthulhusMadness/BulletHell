@@ -142,7 +142,7 @@ public class InputControl : MonoBehaviour
             }
             direction = new Vector2(targetPoint.x, targetPoint.z);
 
-            Vector3 pointToLook = transform.position + transform.forward;
+            Vector3 pointToLook = Vector3.zero;
             switch (rotationType)
             {
                 case RotationType.LookAtTarget:

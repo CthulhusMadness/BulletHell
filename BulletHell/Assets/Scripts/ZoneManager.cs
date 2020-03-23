@@ -82,6 +82,7 @@ public class ZoneManager : MonoBehaviour
             else
             {
                 yield return new WaitUntil(gameManager.ControlIfSpawnedEnemiesAreDead);
+                canSpawnNewWave = true;
             }
             
             yield return new WaitUntil( () => canSpawnNewWave);

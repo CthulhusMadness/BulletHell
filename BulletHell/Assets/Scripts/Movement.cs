@@ -34,6 +34,10 @@ public class Movement : MonoBehaviour
 
     public void LookAt(Vector3 target)
     {
+        if (target == Vector3.zero)
+        {
+            target = transform.position + graphics.forward;
+        }
         graphics.LookAt(target);
     }
 

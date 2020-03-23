@@ -4936,11 +4936,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e10ee80972b5d439a205168b3c2988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 
   particle: {fileID: 5175917933900748878}
   collider: {fileID: 6977828149669948810}
   meshRenderer: {fileID: 2963650590017851094}
   rb: {fileID: 5028361897348100176}
   lifeTime: 8
-  speed: 10
+  speed: 15
   sfxKey: Shot
