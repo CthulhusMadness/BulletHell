@@ -69,3 +69,4 @@ MonoBehaviour:
     - {fileID: 0}
     hasWaveTimer: 0
     timer: 10
+  gizmoColor: {r: 0, g: 1, b: 0, a: 0.7019608}

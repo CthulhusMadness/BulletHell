@@ -424,7 +424,7 @@ PrefabInstance:
     - target: {fileID: 5429686962259101532, guid: db025ae392d043b44a554cbde8b29aa8,
         type: 3}
       propertyPath: agentCanShoot
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5429686962259101532, guid: db025ae392d043b44a554cbde8b29aa8,
         type: 3}
@@ -1668,7 +1668,7 @@ PrefabInstance:
     - target: {fileID: 5429686962259101532, guid: db025ae392d043b44a554cbde8b29aa8,
         type: 3}
       propertyPath: agentCanShoot
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5429686962259101532, guid: db025ae392d043b44a554cbde8b29aa8,
         type: 3}
@@ -2742,5 +2742,10 @@ PrefabInstance:
       propertyPath: waves.Array.data[1].enemies.Array.data[2]
       value: 
       objectReference: {fileID: 588878306}
+    - target: {fileID: 9126447695533526678, guid: e95561fdd651dfb4a8f6948092f50d4e,
+        type: 3}
+      propertyPath: gizmoColor.a
+      value: 0.7019608
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e95561fdd651dfb4a8f6948092f50d4e, type: 3}

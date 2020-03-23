@@ -25,6 +25,7 @@ public class ZoneManager : MonoBehaviour
         }
     }
     [SerializeField] private List<Wave> waves = new List<Wave>();
+    [SerializeField] private Color gizmoColor = Color.green;
 
     private GameManager gameManager;
     private bool canSpawnNewWave;
@@ -46,6 +47,12 @@ public class ZoneManager : MonoBehaviour
             isWaveActivated = true;
             StartCoroutine(WaveControl());
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = gizmoColor;
+        Gizmos.DrawCube(transform.position, transform.lossyScale);
     }
 
     #endregion
