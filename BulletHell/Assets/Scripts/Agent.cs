@@ -9,6 +9,8 @@ public class Agent : MonoBehaviour
 
     [SerializeField] private int HP = 5;
     [SerializeField] private InputControl input;
+    [SerializeField] private GameObject graphics;
+    [SerializeField] private GameObject deathParticle;
 
     #endregion
 
@@ -40,7 +42,10 @@ public class Agent : MonoBehaviour
         switch (input.type)
         {
             case InputControl.AgentType.Player:
-
+                Camera.main.transform.SetParent(null);
+                GameManager.Instance.PlayerDeath();
+                Instantiate(deathParticle, transform.position, Quaternion.identity);
+                gameObject.SetActive(false);
                 break;
             
             case InputControl.AgentType.Enemy:

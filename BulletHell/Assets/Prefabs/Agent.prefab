@@ -379,6 +379,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   input: {fileID: 5429686962259101532}
+  graphics: {fileID: 5429686962084353427}
+  deathParticle: {fileID: 6348152451836411492, guid: 40008e37aef1e4749ab88e6298d447f9,
+    type: 3}
 --- !u!114 &5429686962259101532
 MonoBehaviour:
   m_ObjectHideFlags: 0

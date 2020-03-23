@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerRifleData
   m_EditorClassIdentifier: 
   quantity: 1
-  fireRate: 0.2
+  fireRate: 0.15
   waveDelay: 0
   angle: 0
