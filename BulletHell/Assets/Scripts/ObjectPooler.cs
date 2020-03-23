@@ -38,7 +38,7 @@ public class ObjectPooler : MonoBehaviour
             Queue<GameObject> objectPool = new Queue<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject instance = Instantiate(pool.prefab);
+                GameObject instance = Instantiate(pool.prefab, transform);
                 instance.name = "Projectile " + i;
                 instance.SetActive(false);
                 objectPool.Enqueue(instance);

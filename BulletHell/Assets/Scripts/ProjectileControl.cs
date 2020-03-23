@@ -9,7 +9,7 @@ public class ProjectileControl : MonoBehaviour
 {
     #region Fields
 
-    public string targetTag;
+    [NonSerialized] public string targetTag;
     
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Collider collider;
@@ -17,6 +17,7 @@ public class ProjectileControl : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float lifeTime = 10f;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private string sfxKey;
     
     private IEnumerator coroutine;
 
@@ -69,6 +70,7 @@ public class ProjectileControl : MonoBehaviour
         }
         coroutine = Life();
         StartCoroutine(coroutine);
+        SFXPlayer.Instance.PlayOneShot(sfxKey);
     }
 
     private IEnumerator Life()

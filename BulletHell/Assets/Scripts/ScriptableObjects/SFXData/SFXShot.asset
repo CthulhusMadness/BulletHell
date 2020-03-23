@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86a1a986a2a54e44afe708fb6eb4ce5, type: 3}
+  m_Name: SFXShot
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: b8ff0e3b4d41a88459f680cc3c376eef, type: 3}
+  volume: 0.4
+  pitch: 1

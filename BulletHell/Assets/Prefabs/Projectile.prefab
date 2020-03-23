@@ -4943,3 +4943,4 @@ MonoBehaviour:
   rb: {fileID: 5028361897348100176}
   lifeTime: 8
   speed: 10
+  sfxKey: Shot
