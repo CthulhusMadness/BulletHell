@@ -622,6 +622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canShoot: 0
-  weaponData: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: 4340f29672afb814ab3d80374762e3e3, type: 2}
   projectilePrefab: {fileID: 1019503300961817909, guid: 7ad3778599a87db49b3c923bf44155d6,
     type: 3}

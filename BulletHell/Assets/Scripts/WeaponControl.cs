@@ -38,7 +38,10 @@ public class WeaponControl : MonoBehaviour
 
     private void Shoot()
     {
-        StartCoroutine(weaponData.Shoot(transform, this, targetTag));
+        if (weaponData && ObjectPooler.Instance)
+        {
+            StartCoroutine(weaponData.Shoot(transform, this, targetTag));
+        }
     }
 
     #endregion
