@@ -7,9 +7,12 @@ public class Agent : MonoBehaviour
 {
     #region Fields
 
+    public float basicSpeed = 8f;
+    public float extraSpeed = 0f;
+    public int basicDamage = 1;
+    public int extraDamage = 0;
     [SerializeField] private int HP = 5;
     [SerializeField] private InputControl input;
-    [SerializeField] private GameObject graphics;
     [SerializeField] private GameObject deathParticle;
 
     #endregion
@@ -28,9 +31,10 @@ public class Agent : MonoBehaviour
 
     #region Methods
 
-    public void Hit()
+    public void Hit(int damage)
     {
-        HP -= 1;
+        Debug.Log($"{gameObject.name} is damaged and lost {damage} HP");
+        HP -= damage;
         if (input && HP <= 0)
         {
             Death();

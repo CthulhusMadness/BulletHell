@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +7,13 @@ public class Movement : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private float speed = 5f;
     [SerializeField] private Transform graphics;
 
     #endregion
 
     #region UnityCallbacks
-
-
+    
+    
 
     #endregion
 
@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
 
     #region Movement
     
-    public virtual void Move(Vector2 direction)
+    public void Move(Vector2 direction, float speed)
     {
         float step = speed * Time.deltaTime;
         Vector3 movement = new Vector3(direction.x, 0, direction.y).normalized;

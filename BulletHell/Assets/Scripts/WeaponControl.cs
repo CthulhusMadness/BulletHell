@@ -28,19 +28,19 @@ public class WeaponControl : MonoBehaviour
 
     #region Methods
 
-    public void ControlWeapon()
+    public void ControlWeapon(int damage)
     {
         if (canShoot)
         {
-            Shoot();
+            Shoot(damage);
         }
     }
 
-    private void Shoot()
+    private void Shoot(int damage)
     {
         if (weaponData && ObjectPooler.Instance)
         {
-            StartCoroutine(weaponData.Shoot(transform, this, targetTag));
+            StartCoroutine(weaponData.Shoot(transform, this, targetTag, damage));
         }
     }
 

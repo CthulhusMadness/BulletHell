@@ -19,11 +19,13 @@ public class InputControl : MonoBehaviour
     public AgentType type;
     public bool agentCanShoot = true;
 
+    [Title("References")]
     [SerializeField] private InputData inputData;
-    [SerializeField, HideIf("type", AgentType.Enemy)] private Camera cam;
+    [ShowIf("type", AgentType.Player)] 
+    [SerializeField] private Camera cam;
+    [SerializeField] private Agent agent;
     [SerializeField] private Movement movement;
     [SerializeField] private Transform weapons;
-    
     
     [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)]
     [SerializeField] private Transform target;
@@ -52,13 +54,17 @@ public class InputControl : MonoBehaviour
     {
         SetWeaponsTargetTag();
         
-        if (inputData == null)
+        if (!inputData)
         {
             inputData = ScriptableObject.CreateInstance<InputData>();
         }
-        if (cam == null && type == AgentType.Player)
+        if (!cam && type == AgentType.Player)
         {
             cam = Camera.current;
+        }
+        if (!agent)
+        {
+            agent = GetComponent<Agent>();
         }
     }
 
@@ -69,7 +75,8 @@ public class InputControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movement.Move(direction);
+        float speed = agent.basicSpeed + agent.extraSpeed;
+        movement.Move(direction, speed);
     }
 
     private void OnDrawGizmosSelected()
@@ -110,7 +117,7 @@ public class InputControl : MonoBehaviour
             {
                 foreach (Transform weapon in weapons)
                 {
-                    weapon.GetComponent<WeaponControl>().ControlWeapon();
+                    weapon.GetComponent<WeaponControl>().ControlWeapon(agent.basicDamage + agent.extraDamage);
                 }
             }
         }
@@ -173,7 +180,7 @@ public class InputControl : MonoBehaviour
             {
                 foreach (Transform weapon in weapons)
                 {
-                    weapon.GetComponent<WeaponControl>().ControlWeapon();
+                    weapon.GetComponent<WeaponControl>().ControlWeapon(agent.basicDamage + agent.extraDamage);
                 }
             }
         }

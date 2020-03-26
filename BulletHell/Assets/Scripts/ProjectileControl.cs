@@ -10,6 +10,7 @@ public class ProjectileControl : MonoBehaviour
     #region Fields
 
     [NonSerialized] public string targetTag;
+    [NonSerialized] public int damage = 1;
     
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Collider collider;
@@ -94,7 +95,7 @@ public class ProjectileControl : MonoBehaviour
     [Button(ButtonSizes.Medium)]
     private void Hit(Agent target)
     {
-        target.Hit();
+        target.Hit(damage);
         collider.enabled = false;
         meshRenderer.enabled = false;
         rb.velocity = Vector3.zero;

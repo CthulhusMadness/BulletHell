@@ -377,6 +377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a98c2ad35dc1f4b9cbec0564ea70f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 8
+  basicDamage: 1
+  extraDamage: 0
   HP: 10
   input: {fileID: 5429686962259101532}
   graphics: {fileID: 5429686962084353427}
@@ -398,6 +401,7 @@ MonoBehaviour:
   agentCanShoot: 1
   inputData: {fileID: 11400000, guid: acb202c2e8afca94b8460c2e3b6fc258, type: 2}
   cam: {fileID: 5429686961502941800}
+  agent: {fileID: 4268179288291308282}
   movement: {fileID: 957353326}
   weapons: {fileID: 1739227018279448874}
   target: {fileID: 0}
@@ -417,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7aee9d3e4a13c944aa22760a75ff829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  agent: {fileID: 4268179288291308282}
   graphics: {fileID: 5429686962084353424}
 --- !u!1 &5429686963126758483
 GameObject:

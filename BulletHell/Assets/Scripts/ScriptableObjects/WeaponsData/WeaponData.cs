@@ -21,17 +21,19 @@ public class WeaponData : ScriptableObject
 
     #region Methods
 
-    public IEnumerator Shoot(Transform weaponPoint, WeaponControl weaponControl, string targetTag)
+    public IEnumerator Shoot(Transform weaponPoint, WeaponControl weaponControl, string targetTag, int damage)
     {
         weaponControl.canShoot = false;
         for (int i = 0; i < quantity;)
         {
             GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectile");
-            ProjectileControl projectileControl = projectile.GetComponent<ProjectileControl>();
-            projectileControl.targetTag = targetTag;
             var rot = Quaternion.AngleAxis(angle * i - angle * ((quantity - 1) / 2f), Vector3.up);
             var lDirection = rot * weaponPoint.forward;
             projectile.transform.position = weaponPoint.position;
+            
+            ProjectileControl projectileControl = projectile.GetComponent<ProjectileControl>();
+            projectileControl.targetTag = targetTag;
+            projectileControl.damage = damage;
             projectileControl.StartLife();
             projectileControl.PushToDirection(lDirection);
             if (fireRate > 0f)
