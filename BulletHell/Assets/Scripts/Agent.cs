@@ -12,8 +12,14 @@ public class Agent : MonoBehaviour
     public int basicDamage = 1;
     public int extraDamage = 0;
     [SerializeField] private int HP = 5;
-    [SerializeField] private InputControl input;
+
+    [NonSerialized] public PowerUpData currentPowerUp;
+    
+    public InputControl input;
+    [SerializeField] private ParticleSystem damageParticle;
     [SerializeField] private GameObject deathParticle;
+
+    private IEnumerator coroutine;
 
     #endregion
 
@@ -33,8 +39,8 @@ public class Agent : MonoBehaviour
 
     public void Hit(int damage)
     {
-        Debug.Log($"{gameObject.name} is damaged and lost {damage} HP");
         HP -= damage;
+
         if (input && HP <= 0)
         {
             Death();
@@ -57,6 +63,27 @@ public class Agent : MonoBehaviour
                 gameObject.SetActive(false);
                 break;
         }
+    }
+
+    public void ActivatePowerUpTimer()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = PowerUpTimer();
+        StartCoroutine(coroutine);
+    }
+    
+    private IEnumerator PowerUpTimer()
+    {
+        yield return new WaitForSeconds(currentPowerUp.timer);
+        DeletePowerUp();
+    }
+
+    public void DeletePowerUp()
+    {
+        currentPowerUp.DeletePowerUp(this);
     }
 
     #endregion

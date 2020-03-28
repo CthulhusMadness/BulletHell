@@ -21,11 +21,11 @@ public class InputControl : MonoBehaviour
 
     [Title("References")]
     [SerializeField] private InputData inputData;
+    [SerializeField] private Agent agent;
     [ShowIf("type", AgentType.Player)] 
     [SerializeField] private Camera cam;
-    [SerializeField] private Agent agent;
     [SerializeField] private Movement movement;
-    [SerializeField] private Transform weapons;
+    public Transform weapons;
     
     [TitleGroup("AI"), ShowIf("type", AgentType.Enemy)]
     [SerializeField] private Transform target;

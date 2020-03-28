@@ -13,6 +13,7 @@ public class WeaponControl : MonoBehaviour
     [NonSerialized] public string targetTag;
 
     [SerializeField] private WeaponData weaponData;
+    public WeaponData temporaryWeapon;
     [SerializeField] private GameObject projectilePrefab;
     
     #endregion
@@ -40,7 +41,14 @@ public class WeaponControl : MonoBehaviour
     {
         if (weaponData && ObjectPooler.Instance)
         {
-            StartCoroutine(weaponData.Shoot(transform, this, targetTag, damage));
+            if (temporaryWeapon)
+            {
+                StartCoroutine(temporaryWeapon.Shoot(transform, this, targetTag, damage));
+            }
+            else
+            {
+                StartCoroutine(weaponData.Shoot(transform, this, targetTag, damage));
+            }
         }
     }
 
