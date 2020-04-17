@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: ShotgunPowerUp
-  m_EditorClassIdentifier: Assembly-CSharp::NewWeapon
+  m_Script: {fileID: 11500000, guid: 95dda10d2ad84f0bbd4ea078c7c62d16, type: 3}
+  m_Name: ShieldPowerUp
+  m_EditorClassIdentifier: 
   timer: 5
-  weaponData: {fileID: 11400000, guid: b9d69ad8316a80a4f8efb25a8da9358b, type: 2}
+  shieldPrefab: {fileID: 7874308386795338357, guid: e50e945888334754b8cd7b048825423f,
+    type: 3}
