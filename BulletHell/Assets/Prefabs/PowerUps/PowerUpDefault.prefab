@@ -106,4 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645944ae95443b743a0d76d070f14547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpData: {fileID: 11400000, guid: c016b05575a2c8643a02d610f353aa56, type: 2}
+  powerUpData: {fileID: 0}
+  floatingSpeed: 4
+  floatingForce: 0.3
+  rotationSpeed: 200
